@@ -379,4 +379,54 @@ S třídami, jejich atributy a jejich metodami nám přibylo spoustu dalších k
 
 ## Výčtové typy
 
-BONUS TBD
+Výčtové typy, neboli <b>enum</b>y slouží v Javě k vytváření vlastních datových typů, kdy každý takový datový typ může nabývat vždy jen předem specifikovaných hodnot a používají se opět právě pro reprezentaci nějakých, při tvorbě programu známých množin hodnot o nihž se nečeká, že se budou příliš, či vůbec měnit - třeba dnů v týdnu, kdy bychom měli výčtový typ Den a jeho možné hodnoty by pak byly jednotlivé dny v týdnu, nebo v našem případě třeba výčtový typ, který by reprezentoval typ motoru v tom našem autě.
+
+Výčtový typ se vytváří podobně, jako třída - jen při vytváření zvolíme "enum" místo "class" a i svoji strukturou bude třídu připomínat.
+
+```java
+public enum Den {
+  PONDELI,
+  UTERY,
+  STREDA,
+  CTVRTEK,
+  PATEK,
+  SOBOTA,
+  NEDELE
+}
+```
+
+Stejně jako u třídy definice začíná modifikátorem viditelnosti, následuje klíčové slovo <b>enum</b>, kterým říkáme, že vytváříme enum, pak následuje jméno našeho enumu - to píšeme stejně jako jména tříd za pomocí Pascal case a nakonec už samotné tělo enumu, které obsahuje výčet hodnot - konstant, které tento enum může nabývat. Tím, že jde o konstanty, používáme při jejich pojmenovávání stejný styl, jako když jsme si vytvářeli proměnnou, která byla <b>final</b> - všechna písmena jsou v názvech velká a jednotlivá slova v názvu jsou oddělená podtržítkem.
+
+Řekli jsme si, že jde o datový typ a tedy si můžeme vytvořit proměnnou s tímto datovým typem:
+```java
+Den den = Den.STREDA;
+```
+
+Všimněte si, jak se dostáváme k jednotlivým hodnotám toho enumu - přes těčkovou notaci, kdy napíšeme jméno enumu, tečka, a pak následuje konkrétní hodnota toho enumu.
+
+Tady ale podoba s třídou nekončí - enumy, stejně jako třídy, mohou mít i vlastní atributy, konstruktory, i metody a platí pro ně i stejná pravidla s jednou výjimkou - že konstruktory si vytváříme s modifikátorem viditelnosti <b>private</b>, protože ten konstruktor slouží vždy jen k vytvoření hodnot, kterých může tento enum nabývat.
+
+Kupříkladu u jednotlivých dnů si budeme moct evidovat to, jestli jde o pracovní den, nebo ne.
+
+```java
+public enum Den {
+  PONDELI(true),
+  UTERY(true),
+  STREDA(true),
+  CTVRTEK(true),
+  PATEK(true),
+  SOBOTA(false),
+  NEDELE(false);
+  
+  private boolean jePracovni;
+  
+  private Den(boolean jePracovni) {
+    this.jePracovni = jePracovni;
+  }
+  
+  public boolean jePracovni() {
+    return jePracovni;
+  }
+  
+}
+```
