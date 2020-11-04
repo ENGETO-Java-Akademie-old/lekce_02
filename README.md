@@ -430,3 +430,9 @@ public enum Den {
   
 }
 ```
+
+A to, jestli je nebo není pracovní následně zjistíme takto:
+
+```java
+Den.PONDELI.jePracovni()
+```
